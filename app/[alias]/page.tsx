@@ -5,7 +5,13 @@ import getURLByAlias from '../lib/getURLByAlias'; // Import the utility function
 
 // Export the AliasPage component as the default export
 // This page handles redirection to the original URL or displays an error if the alias is not found
-export default async function AliasPage({ params }: { params: { alias: string } }) {
+type Params = { alias: string };
+
+export default async function AliasPage({
+                                            params,
+                                        }: {
+    params: Params;
+}) {
     const { alias } = params; // Destructure the alias from the params
 
     // Fetch the URL entry associated with the alias
