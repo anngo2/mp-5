@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import createNewURL from '@/app/lib/createNewURL';
 
 export async function POST(request: Request) {
-    let { url, alias } = await request.json();
+    const data = await request.json();
+    let url = data.url;
+    const alias = data.alias;
 
     // Validate presence of url and alias
     if (!url || !alias) {
@@ -13,7 +15,6 @@ export async function POST(request: Request) {
     }
 
     // Prepend 'http://' if the URL does not have a protocol
-
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
