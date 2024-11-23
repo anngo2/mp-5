@@ -4,9 +4,7 @@ import getURLByAlias from '@/app/lib/getURLByAlias'; // Import a utility functio
 import { Box, Typography } from '@mui/material'; // Import MUI components for styling
 
 // Define the structure for the params object passed to this page
-interface Params {
-    params: { alias: string }; // Alias is a string that represents the shortened URL's identifier
-}
+
 
 // Export the SuccessPage component as the default export
 // This page will display the shortened URL after successful creation

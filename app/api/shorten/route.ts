@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import createNewURL from '@/app/lib/createNewURL';
 
 export async function POST(request: Request) {
-    let { url, alias } = await request.json();
+    const { url, alias } = await request.json();
 
     // Validate presence of url and alias
     if (!url || !alias) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     let urlObject;
     try {
         urlObject = new URL(url);
-    } catch (error) {
+    } catch  {
         return NextResponse.json({ message: 'Invalid URL' }, { status: 400 });
     }
 
