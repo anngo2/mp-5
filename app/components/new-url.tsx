@@ -1,17 +1,22 @@
+// new-url.tsx
 'use client'; // Indicates that this component should be rendered on the client side (Next.js specific)
 
 import React, { useState } from 'react'; // Import React and useState hook for state management
-import { Button, TextField, Box } from "@mui/material"; // Import Material-UI components for styling
+import { Button, TextField, Box } from '@mui/material'; // Import Material-UI components for styling
+import { useRouter } from 'next/navigation'; // Import useRouter for client-side navigation
 
 // Define and export the NewURL component
 // The component takes a `createFunc` prop, which is a function to handle URL creation
-export default function NewURL({createFunc,}: {
+export default function NewURL({
+                                   createFunc,
+                               }: {
     createFunc: (url: string, alias: string) => Promise<boolean>; // Function signature for createFunc
 }) {
     // State variables for the URL, alias, and error message
     const [url, setUrl] = useState(''); // State for the input URL
     const [alias, setAlias] = useState(''); // State for the input alias
     const [errorMessage, setErrorMessage] = useState(''); // State for error messages
+    const router = useRouter(); // Hook for client-side navigation
 
     // Asynchronous function to handle form submission
     async function submitNewURL() {
@@ -21,10 +26,12 @@ export default function NewURL({createFunc,}: {
             setAlias(''); // Reset the alias input
             setErrorMessage(''); // Clear any error message
             // Redirect to the success page for the created alias
-            window.location.href = `/success/${alias}`;
+            router.push(`/success/${alias}`);
         } else {
             // Display an error message if the alias already exists or the URL is invalid
-            setErrorMessage('Alias already exists (access by localhost:3000/success/[alias]) or URL is invalid');
+            setErrorMessage(
+                'Alias already exists (access by localhost:3000/success/[alias]) or URL is invalid'
+            );
         }
     }
 
@@ -41,7 +48,6 @@ export default function NewURL({createFunc,}: {
         >
             <Box
                 sx={{
-
                     padding: 4,
                     backgroundColor: '#ffffff',
                     borderRadius: 2,
@@ -59,7 +65,6 @@ export default function NewURL({createFunc,}: {
                 >
                     {/* Input field for the URL */}
                     <TextField
-
                         fullWidth // Occupy the full width of the container
                         sx={{ marginBottom: 2 }} // Add spacing below the input
                         label="URL" // Input label
@@ -70,7 +75,6 @@ export default function NewURL({createFunc,}: {
                     />
                     {/* Input field for the alias */}
                     <TextField
-
                         fullWidth // Occupy the full width of the container
                         sx={{ marginBottom: 2 }} // Add spacing below the input
                         label="Alias" // Input label
